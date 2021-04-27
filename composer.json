@@ -3,12 +3,20 @@
     "description": "Example Composer Github Actions",
     "type": "project",
     "require": {
-        "symfony/symfony": "^5.2"
+        "symfony/symfony": "^5.2",
+        "piotrkardasz/example-private-repo": "@dev"
     },
     "authors": [
         {
             "name": "Piotr Kardasz",
             "email": "piotr.kardasz91@gmail.com"
         }
-    ]
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/piotrkardasz/example-private-repo"
+        }
+    ],
+    "minimum-stability": "dev"
 }
