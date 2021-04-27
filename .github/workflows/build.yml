@@ -14,9 +14,25 @@ on:
 jobs:
     build-test:
         runs-on: ubuntu-latest
+        name: "PHP ${{ matrix.php }}"
 
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [ 7.4, 7.3, 8.0 ]
         steps:
             -   uses: actions/checkout@v2
 
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    extensions: intl
+                    coverage: none
+
             -   name: Install PHP dependencies
-                run: composer install --no-interaction
+                uses: php-actions/composer@v5
+                with:
+                    php_version: ${{ matrix.php }}
+                    ssh_key: ${{ secrets.ssh_key }}
+                    ssh_key_pub: ${{ secrets.ssh_key_pub }}
